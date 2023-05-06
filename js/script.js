@@ -2,7 +2,7 @@ window.onload = function() {
 
     var containerGame = document.querySelector('#container-game');
     var ctx = containerGame.getContext("2d"); // Selecionado o tipo de gráfico do conteinerGame
-    document.addEventListener('touchstart', keyPush); // Toda vez o a tecla "keydown" for pressionada essa função sera executada
+    document.addEventListener('keydown', keyPush); // Toda vez o a tecla "keydown" for pressionada essa função sera executada
 
     setInterval(game, 160); // Define um intervalo para que uma função, game, seja chamada. Intervalo, no caso, de 160 milisegundos
 
@@ -21,7 +21,7 @@ window.onload = function() {
     score.innerText = "00";
     var numberScore = 0;
 
-    // ESSA É A FUNÇÃO RESPONSÁVEL POR FAZER A ATUALIZAÇÃO DA POSIÇÃO DA COBTINHA E RENDERIZA-LA NOVAMENTE SEMPRE QUE ATUALIZADO
+    // ESSA É A FUNÇÃO RESPONSÁVEL POR FAZER A ATUALIZAÇÃO DA POSIÇÃO DA COBRINHA E RENDERIZA-LA NOVAMENTE SEMPRE QUE ATUALIZADO
     function game() {
         positionX += velX;
         positionY += velY;
@@ -77,30 +77,30 @@ window.onload = function() {
         }
     }
 
-    function keyPush() {
-        var triangle = document.querySelector('.container-triangle');
-        var xis = document.querySelector('.container-x');
-        var square = document.querySelector('.container-square');
-        var circle = document.querySelector('.container-circle');
-
-        triangle.addEventListener('touchstart', () => {
-            velX = 0;
-            velY = -numberBlocksForSecund;
-        });
-
-        xis.addEventListener('touchstart', () => {
-            velX = 0;
-            velY = numberBlocksForSecund;
-        });
-
-        square.addEventListener('touchstart', () => {
-            velX = -numberBlocksForSecund;
-            velY = 0;
-        });
-
-        circle.addEventListener('touchstart', () => {
-            velX = numberBlocksForSecund;
-            velY = 0;
-        });
+    function keyPush(e) {
+        switch (e.keyCode) {
+            case 87:
+                velX = 0;
+                velY = -numberBlocksForSecund;
+                break;
+        
+            case 83:
+                velX = 0;
+                velY = numberBlocksForSecund;
+                break;
+        
+            case 65:
+                velX = -numberBlocksForSecund;
+                velY = 0;
+                break;
+        
+            case 68:
+                velX = numberBlocksForSecund;
+                velY = 0;
+                break;
+        
+            default:
+                break;
+        }
     }
 }
